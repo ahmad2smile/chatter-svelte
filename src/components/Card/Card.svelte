@@ -5,7 +5,7 @@
     min-height: 50%;
     padding: 15px;
     position: relative;
-    background-color: #475c7b;
+    background-color: #fff;
     color: #fff;
   }
 </style>
