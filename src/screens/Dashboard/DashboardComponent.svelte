@@ -1,34 +1,36 @@
 <script>
-  import { onMount } from "svelte";
-  import axios from "axios";
+  import Chatter from "./Chatter/Chatter";
 
-  const appBaseUrl = "https://chatter-api.azurewebsites.net/api/";
-
-  const api = axios.create({
-    baseURL: appBaseUrl,
-    timeout: 15000,
-    headers: {
-      "Content-Type": "application/json"
-    }
-  });
-
-  let chatter = {
-    title: "",
-    description: "",
-    source: ""
-  };
-
-  async function getChatter() {
-    const response = await api.get("/chatter");
-
-    chatter = response.data;
-  }
-
-  onMount(getChatter);
+  import { progress } from "../../appstate/store";
 </script>
 
+<style>
+			.container {
+			  height: 100vh;
+			  display: flex;
+			  flex-direction: column;
+			  justify-content: center;
+			  align-items: center;
+			  position: relative;
+			}
+			.header {
+			  font-style: italic;
+			  font-size: 36;
+			  font-weight: 600;
+			}
+			.progress {
+			  position: absolute;
+			  bottom: 0;
+			  width: 100%;
+			  height: 4px;
+			}
+</style>
 
-<div>This is Dashboard</div>
-<div>{chatter.title}</div>
-<div>{chatter.description}</div>
-<div>{chatter.source}</div>
+<div class="container">
+  <h2 class="header">Random Chatter</h2>
+  <Chatter />
+  <div
+    class="progress"
+    style={`background: linear-gradient(to right,  #fdbb6d ${$progress}%, transparent 1%)`}
+  />
+</div>
